@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SF Greeting Concept Preview</title>
+  <style>
+    :root {
+      --bg: #f5f5f3;
+      --panel: #ffffff;
+      --text: #222221;
+      --muted: #666662;
+      --rule: #dadad6;
+      --shadow: 0 18px 40px rgba(20,20,18,0.08);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      padding: 40px 20px;
+    }
+    .wrap {
+      max-width: 760px;
+      margin: 0 auto;
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      padding: 36px 36px 48px;
+    }
+    .top {
+      text-align: center;
+      margin-bottom: 18px;
+    }
+    .top img {
+      width: 72px;
+      height: 72px;
+      display: block;
+      margin: 0 auto 14px;
+    }
+    .eyebrow {
+      font-size: 11px;
+      letter-spacing: 2.4px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 0;
+    }
+    .rule {
+      width: 44px;
+      height: 1px;
+      background: var(--rule);
+      margin: 14px auto 0;
+    }
+    .hero {
+      margin: 28px auto 24px;
+      max-width: 620px;
+      background: #fcfcfb;
+      border: 1px solid #ecece8;
+      padding: 16px;
+    }
+    .hero-placeholder {
+      aspect-ratio: 16 / 11;
+      width: 100%;
+      display: grid;
+      place-items: center;
+      color: var(--muted);
+      background: linear-gradient(180deg, #ffffff 0%, #f7f7f4 100%);
+      border: 1px dashed #d8d8d4;
+      text-align: center;
+      padding: 24px;
+    }
+    .bodycopy {
+      text-align: center;
+      font-size: 15px;
+      line-height: 1.8;
+      color: #2d2d2b;
+      max-width: 560px;
+      margin: 0 auto;
+    }
+    .note {
+      text-align: center;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.7;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="top">
+      <img src="https://raw.githubusercontent.com/laughjaja/sarah-fell-website/websitev2/public/S-logo%20sf.png" alt="Sarah Fell logo" />
+      <p class="eyebrow">From Sarah Fell</p>
+      <div class="rule"></div>
+    </section>
+
+    <section class="hero">
+      <div class="hero-placeholder">
+        <div>
+          <strong>Animated hero goes here</strong><br /><br />
+          Closed envelope → opens automatically → message reveals inside the letter → final open state
+        </div>
+      </div>
+    </section>
+
+    <section class="bodycopy">
+      This concept preview keeps the shell neutral and structured. The premium feel should come from the envelope animation, spacing, typography, and composition rather than a forced beige or decorative palette.
+    </section>
+
+    <p class="note">Next production step: replace the hero placeholder with the final GIF and static fallback image.</p>
+  </main>
+</body>
+</html>
