@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SF Client Card</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Playfair+Display:ital,wght@1,400&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #f3eee6;
+        --surface-top: #e9ddc9;
+        --surface-bottom: #e0d2bc;
+        --body-top: #faf7f1;
+        --body-bottom: #f4eee5;
+        --band-top: #e7dbc7;
+        --band-mid: #dfd1bb;
+        --band-bottom: #d8c9b3;
+        --gold: #8c6911;
+        --ink: #000000;
+        --seam: 65.5%;
+        --left-width: 152.6718%;
+        --right-width: 289.8551%;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        min-height: 100%;
+      }
+
+      body {
+        display: grid;
+        place-items: center;
+        overflow: hidden;
+        background:
+          radial-gradient(circle at top, rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0) 42%),
+          linear-gradient(180deg, rgba(138, 110, 73, 0.08), rgba(138, 110, 73, 0)),
+          var(--bg);
+        padding: 24px;
+      }
+
+      .card-button {
+        width: min(84vw, 420px);
+        aspect-ratio: 420 / 546;
+        position: relative;
+        border: 0;
+        padding: 0;
+        background: none;
+        cursor: pointer;
+        perspective: 2600px;
+      }
+
+      .card-letter {
+        position: absolute;
+        inset: 0;
+        z-index: 10;
+        overflow: hidden;
+        border: 1px solid rgba(217, 204, 184, 0.55);
+        border-radius: 8px;
+        background: linear-gradient(180deg, var(--surface-top), var(--surface-bottom));
+        box-shadow: 0 30px 70px rgba(44, 30, 14, 0.16);
+      }
+
+      .card-letter-grid {
+        display: grid;
+        grid-template-rows: 20% 1fr 18%;
+        height: 100%;
+      }
+
+      .card-band {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .card-band.top {
+        border-bottom: 1px solid rgba(204, 185, 154, 0.7);
+        background: linear-gradient(180deg, var(--band-top), var(--band-mid));
+      }
+
+      .card-band.bottom {
+        border-top: 1px solid rgba(204, 185, 154, 0.7);
+        background: linear-gradient(180deg, var(--band-mid), var(--band-bottom));
+      }
+
+      .band-line {
+        width: 96px;
+        height: 1px;
+        background: rgba(140, 105, 17, 0.5);
+      }
+
+      .card-body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 28px 36px;
+        background: linear-gradient(180deg, var(--body-top), var(--body-bottom));
+      }
+
+      .card-copy {
+        width: 100%;
+        max-width: 268px;
+      }
+
+      .card-copy p {
+        margin: 0 0 20px;
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-size: 15px;
+        line-height: 1.92;
+        letter-spacing: 0.015em;
+        color: var(--ink);
+        font-weight: 600;
+      }
+
+      .card-copy p:last-child {
+        margin-bottom: 0;
+      }
+
+      .card-copy p.gold {
+        color: var(--gold);
+        font-family: "Playfair Display", Georgia, serif;
+        font-style: italic;
+        font-weight: 400;
+      }
+
+      .panel {
+        position: absolute;
+        inset-block: 0;
+        z-index: 20;
+      }
+
+      .panel.left {
+        left: 0;
+        width: var(--seam);
+      }
+
+      .panel.right {
+        left: var(--seam);
+        width: calc(100% - var(--seam));
+      }
+
+      .panel-inner {
+        position: relative;
+        height: 100%;
+        transform-style: preserve-3d;
+        transition: transform 1600ms cubic-bezier(0.22, 1, 0.36, 1);
+      }
+
+      .left .panel-inner {
+        transform-origin: 0% 50%;
+        filter: drop-shadow(0 24px 54px rgba(32, 22, 12, 0.12));
+      }
+
+      .right .panel-inner {
+        transform-origin: 100% 50%;
+        filter: drop-shadow(0 24px 54px rgba(32, 22, 12, 0.12));
+      }
+
+      .card-button.open .left .panel-inner {
+        transform: rotateY(-112deg);
+        filter: drop-shadow(-20px 18px 28px rgba(32, 22, 12, 0.16));
+      }
+
+      .card-button.open .right .panel-inner {
+        transform: rotateY(112deg);
+        filter: drop-shadow(20px 18px 28px rgba(32, 22, 12, 0.16));
+      }
+
+      .panel-face {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        backface-visibility: hidden;
+      }
+
+      .left .front {
+        border-radius: 8px 2px 2px 8px;
+      }
+
+      .right .front {
+        border-radius: 2px 8px 8px 2px;
+      }
+
+      .left .back {
+        border-radius: 8px 2px 2px 8px;
+        border-right: 1px solid rgba(204, 185, 154, 0.7);
+      }
+
+      .right .back {
+        border-radius: 2px 8px 8px 2px;
+        border-left: 1px solid rgba(204, 185, 154, 0.7);
+      }
+
+      .panel-face.back {
+        transform: rotateY(180deg);
+        background: linear-gradient(180deg, var(--surface-top), var(--surface-bottom));
+      }
+
+      .panel-art {
+        position: absolute;
+        inset-block: 0;
+        max-width: none;
+        height: 100%;
+        object-fit: cover;
+        user-select: none;
+        -webkit-user-drag: none;
+      }
+
+      .left .panel-art {
+        left: 0;
+        width: var(--left-width);
+      }
+
+      .right .panel-art {
+        right: 0;
+        width: var(--right-width);
+      }
+
+      @media (max-width: 640px) {
+        body {
+          padding: 16px;
+        }
+
+        .card-body {
+          padding: 24px 28px;
+        }
+
+        .card-copy {
+          max-width: 246px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <button class="card-button" id="card" type="button" aria-label="Open card">
+      <div class="card-letter">
+        <div class="card-letter-grid">
+          <div class="card-band top">
+            <div class="band-line"></div>
+          </div>
+          <div class="card-body">
+            <div class="card-copy">
+              <p>
+                A simple thank you for your trust, your partnership, and the conversations
+                that have made the work both meaningful and enjoyable.
+              </p>
+              <p>
+                Wishing you, your family, and your team a restful long weekend. Enjoy the
+                time off.
+              </p>
+              <p class="gold">We look forward to continuing the work this spring.</p>
+            </div>
+          </div>
+          <div class="card-band bottom">
+            <div class="band-line" style="opacity: 0.76"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel left" aria-hidden="true">
+        <div class="panel-inner">
+          <div class="panel-face front">
+            <img class="panel-art" src="/usethis.svg" alt="" />
+          </div>
+          <div class="panel-face back"></div>
+        </div>
+      </div>
+
+      <div class="panel right" aria-hidden="true">
+        <div class="panel-inner">
+          <div class="panel-face front">
+            <img class="panel-art" src="/usethis.svg" alt="" />
+          </div>
+          <div class="panel-face back"></div>
+        </div>
+      </div>
+    </button>
+
+    <script>
+      const card = document.getElementById("card");
+      card.addEventListener("click", () => {
+        const open = card.classList.toggle("open");
+        card.setAttribute("aria-label", open ? "Close card" : "Open card");
+      });
+    </script>
+  </body>
+</html>
